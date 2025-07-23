@@ -1,0 +1,23 @@
+<div class="mod_shopware_product_list">
+    <h2>Shopware Produkte Modul</h2>
+    <p><?php echo $this->message; ?></p>
+
+    <?php if (isset($this->products) && is_array($this->products) && count($this->products) > 0): ?>
+        <h3>Gefundene Produkte:</h3>
+        <ul>
+            <?php foreach ($this->products as $product): ?>
+                <li>
+                    <strong><?php echo $product['name'] ?? 'Unbenanntes Produkt'; ?></strong>
+                    (Preis: <?php echo $product['price']; ?> €)
+                    <?php if (isset($product['imageUrl'])): ?>
+                        <br><img src="<?php echo $product['imageUrl']; ?>" alt="<?php echo $product['name']; ?>" style="max-width: 150px; height: auto;">
+                    <?php endif; ?>
+                    <p><?php echo $product['description'] ?? ''; ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: // Hier wird der Fall behandelt, wenn keine Produkte gefunden oder ein Fehler auftrat ?>
+        <p>Information: <?php echo $this->message; ?></p>
+    <?php endif; ?>
+    <div><a href="https://jenssmit.de">powerd by Jens Smit</a></div>
+</div>

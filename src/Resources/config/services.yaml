@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Guzzle manuell registrieren (optional, falls woanders gebraucht)
+    guzzle.client:
+        class: GuzzleHttp\Client
+        public: true
+
+    # ShopwareModule als Service registrieren, mit Setter-Injection
+    shopware_bundle\ShopwareBundle\Module\ShopwareModule:
+        public: true
+        calls:
+            - method: setHttpClient
+              arguments:
+                  - '@guzzle.client'
+            - method: setLogger
+              arguments:
+                  - '@monolog.logger.contao'
